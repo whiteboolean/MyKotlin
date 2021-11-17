@@ -19,6 +19,12 @@ public class KtBase34 {
         //具名函数 showResultImpl
         IShowResult mShowResult = new MShowResultImpl();
         showPersonInfo("lsit", 99, 'm', "学习C语言", mShowResult);
+
+
+        String a = "JAKE";
+        String b = "jake";
+        System.out.println(a.equals(b));
+
     }
 
     static class MShowResultImpl implements IShowResult {

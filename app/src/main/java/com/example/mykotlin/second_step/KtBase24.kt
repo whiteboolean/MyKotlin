@@ -18,10 +18,24 @@ fun main() {
     val methodStudy: (Int, String) -> Int
 
     methodStudy = { i: Int, s: String ->
-        (i.toString()+s).toInt()
+        (i.toString() + s).toInt()
     }
 
-    println(methodStudy(1,"32"))
+    println(methodStudy(1, "32"))
+
+}
+
+fun main2() {
+    val methodAction: () -> String
+
+    methodAction = {
+        "你好"
+    }
+
+    val methodAction3: (String, Int) -> Unit
+    methodAction3 = { a, b ->
+        a + b
+    }
 
 }
 

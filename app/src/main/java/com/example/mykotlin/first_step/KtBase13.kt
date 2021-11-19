@@ -9,14 +9,19 @@ fun main(args: Array<String>) {
     }
 
     //range 范围 从哪里到哪里
-    if(number in 0..59){
-        print("不及格")
-    }else if (number in 0..9){
-        print("不及格 并且分数很差")
-    } else if (number in 60..100){
-        print("合格")
-    } else if (number !in 0..100){
-        print("天才")
+    when (number) {
+        in 0..59 -> {
+            print("不及格")
+        }
+        in 0..9 -> {
+            print("不及格 并且分数很差")
+        }
+        in 60..100 -> {
+            print("合格")
+        }
+        !in 0..100 -> {
+            print("天才")
+        }
     }
 
 }

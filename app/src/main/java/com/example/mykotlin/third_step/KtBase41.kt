@@ -7,11 +7,25 @@ import java.lang.IllegalArgumentException
 fun main() {
 
     try {
-        val info: String? = "null"
+        val info: String?  = "null"
         checkException(info)
-        println(info!!.length)
+        val info2:String? = null
+        println(info2?:"fsd")
+
+        var str: String? = null
+        var str2: String? = "May be declare nullable string"
+        var len1:  Int = str ?.length ?: -1
+        var len2:  Int = str2 ?.length ?:  -1
+
+        println("Length of str is ${len1}")
+        println("Length of str2 is ${len2}")
+        return
+//        println(info!!.length)
     } catch (e: Exception) {
+        e.printStackTrace()
         print("嗯嗯嗯")
+    } finally {
+        println("finally之前return了看finally还走不走")
     }
 }
 

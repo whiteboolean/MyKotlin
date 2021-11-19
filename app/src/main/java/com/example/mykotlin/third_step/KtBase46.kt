@@ -4,7 +4,7 @@ import java.lang.Exception
 import java.lang.IllegalArgumentException
 import java.util.*
 
-//TODO 46.kotlin语言 == 和=== 比较操作
+//TODO 46.kotlin语言 == 和 === 比较操作
 fun main() {
     // == 值内容的比较 相当于 Java的equals
     // === 引用的比较

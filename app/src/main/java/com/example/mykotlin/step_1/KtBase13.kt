@@ -4,8 +4,8 @@ package com.example.mykotlin.step_1
 fun main(args: Array<String>) {
     val number = 148
     //range 范围从哪里到哪里
-    if (number in 0..43){
-            print(number)
+    if (number in 0..43) {
+        print(number)
     }
 
     //range 范围 从哪里到哪里

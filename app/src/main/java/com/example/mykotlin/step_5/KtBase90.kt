@@ -2,7 +2,7 @@ package com.example.mykotlin.step_5
 
 //TODO 内部类
 //内部类的特点 ： 内部的类能访问 外部的类
-// 外部的类 能访问内部的类
+//外部的类 能访问内部的类
 class Body(_bodyInfo:String){ //身体类
     val bodyInfo = _bodyInfo
 

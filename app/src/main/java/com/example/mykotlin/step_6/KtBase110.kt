@@ -1,6 +1,4 @@
-package com.derry.s6
-
-import com.example.mykotlin.step_6.*
+package com.example.mykotlin.step_6
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  只管消费者
 class ConsumerClass1 : Consumer<Animal> {

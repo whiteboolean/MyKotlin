@@ -14,3 +14,8 @@ fun main(args: Array<String>) {
 //    val f = a.plus(b).plus("1")
 
 }
+
+
+fun String.aa(str:String):String{
+   return str.substring(0)
+}

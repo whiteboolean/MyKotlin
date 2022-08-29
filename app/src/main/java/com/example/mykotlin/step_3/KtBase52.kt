@@ -23,9 +23,10 @@ fun main() {
         4343.43f
     }
 
-    str.run {
-
+   val a  = str.run {
+        23.3f
     }
+
 
     str.run(::具名函数)
         .run(::showText)

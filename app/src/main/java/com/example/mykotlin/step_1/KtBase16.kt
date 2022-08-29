@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
 
 //函数默认都是public
 //其实
-public fun method01(age:Int ,name:String):Int{
+fun method01(age:Int ,name:String):Int{
   println("你的名字是:$name,你的年龄是：$age")
   return 200
 }

@@ -1,4 +1,4 @@
-package com.example.my_kotlin_high_level
+package com.example.my_kotlin_high_level1
 
 /**
  * 玩转lambda表达式和高阶函数
@@ -105,17 +105,103 @@ fun main() {
     method16s("你好", "我是你爹")
 
 
-    var method16ss = {str:String ,str2:String ->
+    var method16ss = { str: String, str2: String ->
         println("str:$str,str2:$str2")
     }
-    method16ss("你好","我是你爷")
+    method16ss("你好", "我是你爷")
 
     //需求，传入什么就打印什么，并且输出
-    val printMe  ={ str:Any ->
+    val printMe = { str: Any ->
         str
     }
     printMe("达不溜")
     printMe("达不溜1")
     printMe(124)
 
+    //给String类，增加一个匿名函数 == 效果： 我们的lambda自动回持有String本身 == this
+    //TODO 这种形式很难理解
+    var method19: String.() -> Unit = {
+        println("you are : $this")
+    }
+
+    println("124".method19())
+
+    //TODO 这种形式也比较难以理解
+    val method21: Int.(Int) -> String = { "$this + $it  = ${this + it}" }
+    println(123.method21(1))
+
+
+    //TODO 还有这种形式
+    val method22: Double.(Double, Double) -> String = { it1, it2 ->
+        "$this + $it1 + $it2 = ${this + it1 + it2}"
+    }
+    println(124.5.method22(214.33, 354.43))
+
+    //TODO 还有这种形式
+    val method23: Char.(String) -> Unit =
+        { println(if (this == '男') "先生你好" else if (this == '女') "女士你好" else it) }
+    '大'.method23("不是人")
+
+    fun Char.method23(default: String) {
+        println(if (this == '男') "先生你好" else if (this == '女') "女士你好" else default)
+    }
+    '男'.method23("未知人类")
+
+    //todo 前面都在讲参数输入 ，现在来讲输出
+    fun t01() {
+        println(1)
+    }
+
+    fun t02() {
+        32552
+    }
+
+    fun t03() {
+        true
+    }
+
+    fun t04(): String {
+        return "你好"
+    }
+
+    fun t05(): Int {
+        return 1243
+    }
+
+
+    val run1: (block: () -> Any) -> Any = {
+        it()
+    }
+    val hello = run1 {
+        "你好"
+    }
+    println(hello)
+
+    "你好".run {
+        println("")
+    }
+
+
+    fun s03(): Boolean = run { true }
+    fun s04(): () -> Boolean = { true }
+    s03()
+    s04()()
+
+    fun k01() = { n1: Int -> println("你的输入类型是int?${if (n1 is Int) "是" else "不是"}") }
+    k01()(89)
+
+    fun k02(): (Int, Int) -> Char = { n1: Int, n2: Int ->
+        println("两数相加:${n1 + n2}")
+        true
+        'A'
+    }
+
+    val age:Int = 19
+
+    fun aa(){}
+    fun aa2(){}
+
+    //aa就是一个函数 ， 实打实的函数
+    //aa2 是接收一个匿名函数的变量而已
 }
+

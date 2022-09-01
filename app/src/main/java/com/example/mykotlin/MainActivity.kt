@@ -3,8 +3,10 @@ package com.example.mykotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,25 +16,47 @@ class MainActivity : AppCompatActivity() {
         logE("1111")
         GlobalScope.launch {
             logE("2222")
-            getFirst()
+            val async1 = async { getFirst() }
             logE("3333")
-            getSecond()
+            val async2 = async { getSecond() }
+            awaitAll(async1, async2).apply {
+                logE("${get(0)} ${get(1)}")
+            }
             logE("4444")
         }
         logE("5555")
     }
 
 
-
-    private fun getFirst(){
-        Thread.sleep(2000)
+    private suspend fun getFirst(): Int = withContext(Dispatchers.IO) {
+        logE.invoke("getFirstStart")
+        delay(2000)
+        logE.invoke("getFirstEnd")
+        return@withContext 1
+//        thread {
+//            logE.invoke("getFirstStart")
+//            Thread.sleep(2000)
+//            logE.invoke("getFirstEnd")
+//        }
     }
 
-    private fun getSecond(){
-        Thread.sleep(3000)
+    private suspend fun getSecond(): Int = withContext(Dispatchers.IO) {
+        logE.invoke("getSecondStart")
+        delay(3000)
+        logE.invoke("getSecondEnd")
+        return@withContext 2
     }
-    
-    val logE: (String)->Unit = {
-        Log.e("MainActivity",it)
+//        thread {
+//            logE.invoke("getSecondStart")
+//            Thread.sleep(3000)
+//            logE.invoke("getSecondEnd")
+//        }
+
+
+    val logE: (String) -> Unit = {
+        Log.e(
+            "MainActivity",
+            "$it time:${SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(System.currentTimeMillis()))}"
+        )
     }
 }

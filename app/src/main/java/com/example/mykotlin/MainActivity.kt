@@ -3,6 +3,7 @@ package com.example.mykotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         logE("1111")
-        GlobalScope.launch {
+        lifecycleScope.launch {
             logE("2222")
             val async1 = async { getFirst() }
             logE("3333")
@@ -28,9 +29,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private suspend fun getFirst(): Int = withContext(Dispatchers.IO) {
+    private suspend fun getFirst(): Int = withContext(Dispatchers.Default) {
         logE.invoke("getFirstStart")
-        delay(2000)
+        getFirst2()
         logE.invoke("getFirstEnd")
         return@withContext 1
 //        thread {
@@ -40,11 +41,25 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
-    private suspend fun getSecond(): Int = withContext(Dispatchers.IO) {
+    private fun getFirst2() {
+        lifecycleScope.launch {
+            Thread.sleep(2000)
+        }
+
+    }
+
+    private suspend fun getSecond(): Int = withContext(Dispatchers.Default) {
         logE.invoke("getSecondStart")
-        delay(3000)
+        getSecond2()
         logE.invoke("getSecondEnd")
         return@withContext 2
+    }
+
+    private fun getSecond2() {
+        lifecycleScope.launch {
+            Thread.sleep(2000)
+        }
+
     }
 //        thread {
 //            logE.invoke("getSecondStart")
@@ -56,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     val logE: (String) -> Unit = {
         Log.e(
             "MainActivity",
-            "$it time:${SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(System.currentTimeMillis()))}"
+            "it:$it threadName:${Thread.currentThread().name} time:${SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(System.currentTimeMillis()))}"
         )
     }
 }

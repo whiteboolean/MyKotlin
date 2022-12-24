@@ -16,15 +16,21 @@ fun main() {
     var method3: (String, Double) -> Any
 
     var method4: (Int, Double, Long, String) -> Boolean
+    var method44: (Int,Double,Long,String)  ->String
+
+    var method55: (Int,Double,Long,String) ->Boolean
 
     var method5: (Int, Int) -> Int
+    var method6: (Int,Boolean) ->Int
+
+    //Int Double 引用类型，反编译成Java字节码文件之后会变成基本类型
 
     // :(参数) ->返回 方式一 基本上属于声明todo函数
     // ={参数->方式} 方式二()基本上属于声明实现结合
 
     val method01 = { println("我是method01函数") }
     method01.invoke()
-    method01()
+    method01() //调用函数() == 操作符重载 invoke操作符
 
     val method02 = { "我是method02函数" }
     val str02 = method02.invoke()
@@ -43,6 +49,7 @@ fun main() {
     val method06: (Int) -> String  //先声明
     method06 = fun(value: Int): String = value.toString()
 
+
     val method07: (Int) -> String//先声明
     method07 = fun(value): String = value.toString()
 
@@ -50,7 +57,7 @@ fun main() {
     val method08: (Int) -> String = { value -> "$value" }
     println(method08(12))
 
-    var method09: (String, String) -> Unit = { aStr, bStr ->
+    val method09: (String, String) -> Unit = { aStr, bStr ->
         println("aStr:$aStr,bStr:$bStr")
     }
     method09("AAA", "BBB")
@@ -59,7 +66,7 @@ fun main() {
         println("$it")
     }
 
-    var method11: (Int) -> Unit = {
+    val method11: (Int) -> Unit = {
         when (it) {
             1 -> println("你传递是一")
             in 2..90 -> println("你传递是20~60之间")
